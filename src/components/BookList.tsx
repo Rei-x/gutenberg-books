@@ -26,7 +26,7 @@ const BookList = ({ booksQuery }: { booksQuery: UseInfiniteQueryResult<ListBooks
           </Button>}
         {booksQuery.data?.pages[0].count === 0 && <Text layout as={motion.div} initial={{ opacity: 0, position: "absolute" }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, position: "absolute" }}>There are no books that matched your query</Text>}
+          exit={{ opacity: 0, position: "absolute" }}>There were no books that matched your query</Text>}
       </VStack>}
     </VStack>
   );
