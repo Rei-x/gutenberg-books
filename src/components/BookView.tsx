@@ -1,11 +1,7 @@
 import { HStack, Box, Heading, Link, Image, Text } from '@chakra-ui/react';
 import NextLink from "next/link";
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Book, ResourceType } from '@/types/booksGet';
-import { StarIcon } from '@chakra-ui/icons';
-import { auth, db } from '@/firebase';
-import { addDoc, collection, deleteDoc, deleteField, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { useQuery, useQueryClient } from 'react-query';
 import MarkAsFavorite from './MarkAsFavorite';
 
 const getImageFromBook = (book: Book) => {
@@ -17,15 +13,15 @@ const getAuthorFromBook = (book: Book) => {
 };
 
 const BookView = ({ book }: { book: Book; }) => {
-
+  const image = useMemo(() => getImageFromBook(book), [book]);
   return (
     <HStack alignItems="flex-start" key={book.id} width={"100%"}>
       <Box width="30%">
-        <Link>
+        {image && <Link>
           <NextLink href={`/book/${book.id}`}>
-            <Image src={getImageFromBook(book)} alt={`Cover of the book`} />
+            <Image src={image} alt={`Cover of the book`} />
           </NextLink>
-        </Link>
+        </Link>}
       </Box>
       <Box width="70%">
         <div>
@@ -37,10 +33,7 @@ const BookView = ({ book }: { book: Book; }) => {
           <Text>Downloads: {book.downloads}</Text>
           <Text>Author: {getAuthorFromBook(book)}</Text>
         </div>
-        <MarkAsFavorite bookId={book.id}/>
-
-
-
+        <MarkAsFavorite bookId={book.id.toString()} />
       </Box>
     </HStack>
   );
