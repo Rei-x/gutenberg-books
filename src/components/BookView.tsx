@@ -3,7 +3,9 @@ import NextLink from "next/link";
 import React, { useMemo } from 'react';
 import { Book, ResourceType } from '@/types/booksGet';
 import MarkAsFavorite from './MarkAsFavorite';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { motion } from 'framer-motion';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const getImageFromBook = (book: Book) => {
   return book.resources.find((resource) => resource.type === ResourceType.ImageJPEG && resource.uri.endsWith("medium.jpg"))?.uri;
@@ -25,7 +27,7 @@ const BookView = ({ book }: { book: Book; }) => {
       <Box width="30%">
         {image && <Link>
           <NextLink href={`/book/${book.id}`}>
-            <Image src={image} alt={`Cover of the book`} />
+            <LazyLoadImage effect="opacity" src={image} alt={`Cover of the book`} />
           </NextLink>
         </Link>}
       </Box>
