@@ -230,7 +230,7 @@
 
 "@chakra-ui/icons@^2.0.0":
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-2.0.0.tgz#2a23cf702823b922eecbaa4228b08d807767434b"
+  resolved "https://registry.npmjs.org/@chakra-ui/icons/-/icons-2.0.0.tgz"
   integrity sha512-2lArHMil6O0FwG6TghKwbe453BM1Zzp22U8+oyTFYDVwqhmBTMAepE9TsBg4w/nnH0aeYjQpA1VVSopgB7HBMw==
   dependencies:
     "@chakra-ui/icon" "3.0.0"
@@ -3038,6 +3038,11 @@ react-fast-compare@3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
+react-firebase-hooks@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-5.0.3.tgz#3125a382d6b72deee776fe1df9e0c8173cf36d5d"
+  integrity sha512-0+V2XwInZJNjW8B2cm+U21Hlv4xnp/1tJqIoDg2rjyWzKTQ9VoLPQ9PAt+fMqPumjLz5uCIREY7YqGSSjc439Q==
 
 react-focus-lock@2.5.2:
   version "2.5.2"
