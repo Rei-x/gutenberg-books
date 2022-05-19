@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import React, { useMemo } from 'react';
 import { Book, ResourceType } from '@/types/booksGet';
 import MarkAsFavorite from './MarkAsFavorite';
+import { motion } from 'framer-motion';
 
 const getImageFromBook = (book: Book) => {
   return book.resources.find((resource) => resource.type === ResourceType.ImageJPEG && resource.uri.endsWith("medium.jpg"))?.uri;
@@ -15,7 +16,12 @@ const getAuthorFromBook = (book: Book) => {
 const BookView = ({ book }: { book: Book; }) => {
   const image = useMemo(() => getImageFromBook(book), [book]);
   return (
-    <HStack alignItems="flex-start" key={book.id} width={"100%"}>
+    <HStack
+      layout layoutId={book.id.toString()}
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }} alignItems="flex-start" key={book.id} width={"100%"} >
       <Box width="30%">
         {image && <Link>
           <NextLink href={`/book/${book.id}`}>
