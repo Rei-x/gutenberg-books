@@ -1,13 +1,15 @@
 import { auth } from '@/firebase';
-import useFavoriteBook from '@/hooks/useFavorite';
+import useFavoriteBook from '@/hooks/useFavoriteBook';
 import { StarIcon } from '@chakra-ui/icons';
 import { HStack, Link } from '@chakra-ui/react';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-const MarkAsFavorite = ({ bookId }: { bookId: number; }) => {
+const MarkAsFavorite = ({ bookId }: { bookId: string; }) => {
   const [isFavorite, setFavorite] = useFavoriteBook(bookId);
+  const [user] = useAuthState(auth);
 
-  if (!auth.currentUser) return null;
+  if (!user) return null;
 
   return (
     <HStack mt={4} cursor="pointer" onClick={() => setFavorite(!isFavorite)

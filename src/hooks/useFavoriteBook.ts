@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "@/firebase";
-import { getDoc, doc, deleteField, setDoc } from "firebase/firestore";
-import { useQuery } from "react-query";
+import { doc, deleteField, setDoc } from "firebase/firestore";
+import useFavoriteBooks from "./useFavoriteBooks";
 
 const useFavoriteBook = (
-  bookId: number
+  bookId: string
 ): [boolean | undefined, typeof setFavorite] => {
-  const favoriteBookQuery = useQuery("favoriteBooks", async () => {
-    const snapshot = await getDoc<Record<string, boolean>>(
-      doc(db, `favorites/${auth.currentUser?.uid}`)
-    );
-    return snapshot.data();
-  });
+  const [favoriteBooks, reloadFavoriteBooks] = useFavoriteBooks();
   const [isFavorite, setIsFavorite] = useState<boolean>();
 
   useEffect(() => {
-    if (favoriteBookQuery.data) {
+    if (favoriteBooks) {
       setIsFavorite(
-        Object.keys(favoriteBookQuery.data).includes(bookId.toString())
+        Boolean(favoriteBooks.find((favoriteBookId) => favoriteBookId === bookId))
       );
     }
-  }, [bookId, favoriteBookQuery.data]);
+  }, [bookId, favoriteBooks]);
 
   const setFavorite = (isFavorite: boolean) => {
     if (isFavorite) {
@@ -40,7 +35,7 @@ const useFavoriteBook = (
         { merge: true }
       );
     }
-    favoriteBookQuery.refetch();
+    reloadFavoriteBooks();
   };
 
   return [isFavorite, setFavorite];
