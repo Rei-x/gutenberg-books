@@ -16,7 +16,7 @@ import useBooks from '@/hooks/useBooks';
 const Home: NextPage = () => {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<Record<string, string>>();
-  const booksQuery = useBooks({ search });
+  const booksQuery = useBooks({ search, filters });
 
   return (
     <Layout>

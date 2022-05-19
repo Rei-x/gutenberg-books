@@ -2,11 +2,11 @@ import { removeUndefinedFromObject } from "../../utils/removeUndefinedFromObject
 import { url } from "../config";
 
 export const listBooks =
-  ({ search, language }: { search?: string; language?: string }) =>
+  ({ search, languages }: { search?: string; languages?: string }) =>
   async ({ pageParam }: { pageParam?: string }) => {
     const params = {
       search,
-      language,
+      languages,
       page: pageParam,
     };
 

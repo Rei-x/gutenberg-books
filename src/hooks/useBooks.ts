@@ -3,10 +3,17 @@ import { useInfiniteQuery } from "react-query";
 import api from "@/api";
 import { ListBooks } from "@/types/booksGet";
 
-const useBooks = ({ search }: { search: string }) => {
+const useBooks = (options?: {
+  search: string;
+  filters?: Record<string, string>;
+}) => {
   return useInfiniteQuery<ListBooks>(
-    ["book", search],
-    api.book.list({ search }),
+    [
+      "book",
+      options?.search === "" ? undefined : options?.search,
+      options?.filters,
+    ],
+    api.book.list({ search: options?.search, languages: options?.filters?.languages}),
     {
       getNextPageParam: (lastPage) => {
         if (!lastPage.next) return false;
