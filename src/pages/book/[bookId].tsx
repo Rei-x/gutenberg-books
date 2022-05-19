@@ -6,10 +6,11 @@ import { useQuery } from 'react-query';
 import api from '@/api';
 import Layout from '@/components/Layout';
 import { Resource, ResourceType } from '@/types/booksGet';
-import { StarIcon } from '@chakra-ui/icons';
+import MarkAsFavorite from '@/components/MarkAsFavorite';
 
 const clickLink = (uri: string) => {
   const a = document.createElement("a");
+  a.target = "_blank";
   a.href = uri;
   a.click();
 };
@@ -37,7 +38,7 @@ const BookPage: NextPage = () => {
   };
 
   const getHtmlLink = (resources: Resource[]) => {
-    return resources.find((resource) => resource.type === ResourceType.TextHTMLCharsetUTF8 || ResourceType.TextHTMLCharsetISO88591)?.uri;
+    return resources.find((resource) => resource.uri.endsWith("htm"))?.uri;
   };
 
   return (
@@ -46,9 +47,7 @@ const BookPage: NextPage = () => {
         <Container>
           <Heading p={2} mt={4} color="gray.500" size="lg" textAlign="center">{bookQuery.data.title}</Heading>
           <Center>
-            <HStack cursor="pointer">
-              <Link textAlign="center" as="p">Mark as favorite </Link><StarIcon />
-            </HStack>
+            <MarkAsFavorite bookId={bookId as string} />
           </Center>
           <Center mt={3}>
             {getHtmlLink(bookQuery.data.resources) && <Button colorScheme="green" onClick={() => clickLink(getHtmlLink(bookQuery.data.resources) || "")}>Read online</Button>}
@@ -56,7 +55,7 @@ const BookPage: NextPage = () => {
           <Wrap justify="center" mt={4}>
             {bookQuery.data.resources.sort().map((resource) => {
               if (resource.type in buttonText) {
-                return <Button onClick={() => clickLink(resource.uri)}>{getButtonText(resource)}</Button>;
+                return <Button key={resource.id} onClick={() => clickLink(resource.uri)}>{getButtonText(resource)}</Button>;
               }
             })}
           </Wrap>
