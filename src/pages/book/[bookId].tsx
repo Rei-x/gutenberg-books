@@ -7,6 +7,7 @@ import api from '@/api';
 import Layout from '@/components/Layout';
 import { Resource, ResourceType } from '@/types/booksGet';
 import MarkAsFavorite from '@/components/MarkAsFavorite';
+import { motion } from 'framer-motion';
 
 const clickLink = (uri: string) => {
   const a = document.createElement("a");
@@ -44,7 +45,11 @@ const BookPage: NextPage = () => {
   return (
     <Layout>
       {bookQuery.isSuccess &&
-        <Container>
+        <Container
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }} >
           <Heading p={2} mt={4} color="gray.500" size="lg" textAlign="center">{bookQuery.data.title}</Heading>
           <Center>
             <MarkAsFavorite bookId={bookId as string} />
