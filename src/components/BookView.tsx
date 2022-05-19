@@ -6,6 +6,7 @@ import { StarIcon } from '@chakra-ui/icons';
 import { auth, db } from '@/firebase';
 import { addDoc, collection, deleteDoc, deleteField, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { useQuery, useQueryClient } from 'react-query';
+import MarkAsFavorite from './MarkAsFavorite';
 
 const getImageFromBook = (book: Book) => {
   return book.resources.find((resource) => resource.type === ResourceType.ImageJPEG && resource.uri.endsWith("medium.jpg"))?.uri;
@@ -16,11 +17,6 @@ const getAuthorFromBook = (book: Book) => {
 };
 
 const BookView = ({ book }: { book: Book; }) => {
-  const favoriteBookQuery = useQuery("favoriteBooks", async () => {
-    const snapshot = await getDoc<Record<string, boolean>>(doc(db, `favorites/${auth.currentUser?.uid}`));
-    return snapshot.data();
-  });
-  const queryClient = useQueryClient();
 
   return (
     <HStack alignItems="flex-start" key={book.id} width={"100%"}>
@@ -41,22 +37,7 @@ const BookView = ({ book }: { book: Book; }) => {
           <Text>Downloads: {book.downloads}</Text>
           <Text>Author: {getAuthorFromBook(book)}</Text>
         </div>
-        {Object.keys(favoriteBookQuery.data || {}).includes(book.id.toString()) ?
-          <HStack mt={4} cursor="pointer" onClick={() => {
-            updateDoc(doc(db, `favorites/${auth.currentUser?.uid}`), {
-              [book.id]: deleteField()
-            });
-            queryClient.invalidateQueries("favoriteBooks");
-          }} >
-            <Link textAlign="center" as="p">Unmark as favorite </Link><StarIcon color="yellow.400" />
-          </HStack> : <HStack mt={4} cursor="pointer" onClick={() => {
-            setDoc(doc(db, `favorites/${auth.currentUser?.uid}`), {
-              [book.id]: true
-            }, { merge: true });
-            queryClient.invalidateQueries("favoriteBooks");
-          }} >
-            <Link textAlign="center" as="p">Mark as favorite </Link><StarIcon color="gray.400" />
-          </HStack>}
+        <MarkAsFavorite bookId={book.id}/>
 
 
 
