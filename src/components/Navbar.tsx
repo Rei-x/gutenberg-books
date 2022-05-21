@@ -12,11 +12,11 @@ const Navbar = () => {
   return (
     <Container maxW="container.lg">
       <HStack mx="auto" maxWidth={"70rem"} mt="6" justifyContent="space-between">
-        <NextLink href="/"><Heading cursor="pointer" as="h1">Gutenberg books</Heading></NextLink>
+        <NextLink href="/"><Heading cursor="pointer" as="h1">MyBook</Heading></NextLink>
         <Box>
           {loading && <Spinner />}
           {!loading && user && <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton fontSize={{ base: "sm", md: "md" }} p={{ base: 2, md: 4 }} as={Button} rightIcon={<ChevronDownIcon />}>
               {user.displayName || "Anonymous"}
             </MenuButton>
             <MenuList>

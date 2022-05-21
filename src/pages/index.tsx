@@ -1,4 +1,4 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import React, { useState } from 'react';
 import BookList from '../components/BookList';
@@ -15,10 +15,12 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Container maxW="container.lg" mt={3} mb={5}>
-        <SearchInput value={search} setValue={setSearch} />
-        <Box mt={1}>
-          <Filters setFilters={setFilters} />
-        </Box>
+        <VStack mt={1} mb={5}>
+          <Box width="100%" maxWidth="lg">
+            <SearchInput value={search} setValue={setSearch} />
+            <Filters setFilters={setFilters} />
+          </Box>
+        </VStack>
         <Box mt={4}>
           <BookList booksQuery={booksQuery} />
         </Box>

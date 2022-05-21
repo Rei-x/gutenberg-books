@@ -23,7 +23,7 @@ const FavoriteBooks: NextPage = () => {
         <VStack gap={8}>
           {favoriteBooks?.map((bookId) => <FavoriteBookView key={bookId} bookId={bookId} />)}
         </VStack>
-        {favoriteBooks?.length === 0 && <Text textAlign="center">You don&apos;t have any favorite books.</Text>}
+        {favoriteBooks?.length === 0 && <Text textAlign="center">You don&apos;t have any favorite books</Text>}
       </Container>
     </Layout>
   );

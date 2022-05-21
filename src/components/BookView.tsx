@@ -20,12 +20,12 @@ const BookView = ({ book }: { book: Book; }) => {
 
   return (
     <HStack
-      width="md"
+      width={["sm", "md"]}
       alignItems="flex-start" key={book.id} >
       <Box width="30%">
         {image && <Link>
           <NextLink href={`/book/${book.id}`}>
-            <ImageWithSkeleton src={image} width="8rem" height="13rem" alt="Cover of the book" />
+            <ImageWithSkeleton src={image} width="100%" height="13rem" alt="Cover of the book" />
           </NextLink>
         </Link>}
       </Box>
