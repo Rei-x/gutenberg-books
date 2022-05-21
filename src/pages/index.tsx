@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <Container mt={3} mb={5}>
+      <Container maxW="container.lg" mt={3} mb={5}>
         <SearchInput value={search} setValue={setSearch} />
         <Box mt={1}>
           <Filters setFilters={setFilters} />

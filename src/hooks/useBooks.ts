@@ -13,7 +13,10 @@ const useBooks = (options?: {
       options?.search === "" ? undefined : options?.search,
       options?.filters,
     ],
-    api.book.list({ search: options?.search, languages: options?.filters?.languages}),
+    api.book.list({
+      search: options?.search,
+      languages: options?.filters?.languages,
+    }),
     {
       getNextPageParam: (lastPage) => {
         if (!lastPage.next) return false;
