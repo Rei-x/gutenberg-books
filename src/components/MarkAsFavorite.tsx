@@ -19,4 +19,4 @@ const MarkAsFavorite = ({ bookId }: { bookId: string; }) => {
   );
 };
 
-export default MarkAsFavorite;
+export default React.memo(MarkAsFavorite);

@@ -6,8 +6,8 @@ const Layout = ({ children }: { children: React.ReactNode; }) => {
   return (
     <div>
       <Head>
-        <title>Gutenberg books</title>
-        <meta name="description" content="Gutenberg books" />
+        <title>MyBook - find your favorite book!</title>
+        <meta name="description" content="Find your favorite book!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />

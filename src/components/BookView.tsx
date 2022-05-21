@@ -1,11 +1,11 @@
-import { HStack, Box, Heading, Link, Image, Text } from '@chakra-ui/react';
+import { HStack, Box, Heading, Link, Image, Text, Skeleton } from '@chakra-ui/react';
 import NextLink from "next/link";
 import React, { useMemo } from 'react';
 import { Book, ResourceType } from '@/types/booksGet';
 import MarkAsFavorite from './MarkAsFavorite';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { motion } from 'framer-motion';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { truncateString } from '@/utils/truncateString';
+import ImageWithSkeleton from './ImageWithSkeleton';
 
 const getImageFromBook = (book: Book) => {
   return book.resources.find((resource) => resource.type === ResourceType.ImageJPEG && resource.uri.endsWith("medium.jpg"))?.uri;
@@ -17,17 +17,15 @@ const getAuthorFromBook = (book: Book) => {
 
 const BookView = ({ book }: { book: Book; }) => {
   const image = useMemo(() => getImageFromBook(book), [book]);
+
   return (
     <HStack
-      layout layoutId={book.id.toString()}
-      as={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }} alignItems="flex-start" key={book.id} width={"100%"} >
+      width={["sm", "md"]}
+      alignItems="flex-start" key={book.id} >
       <Box width="30%">
         {image && <Link>
           <NextLink href={`/book/${book.id}`}>
-            <LazyLoadImage effect="opacity" src={image} alt={`Cover of the book`} />
+            <ImageWithSkeleton src={image} width="100%" height="13rem" alt="Cover of the book" />
           </NextLink>
         </Link>}
       </Box>
@@ -35,7 +33,7 @@ const BookView = ({ book }: { book: Book; }) => {
         <div>
           <Link>
             <NextLink href={`/book/${book.id}`}>
-              <Heading as="h2" size="md">{book.title}</Heading>
+              <Heading as="h2" size="md">{truncateString(book.title)}</Heading>
             </NextLink>
           </Link>
           <Text>Downloads: {book.downloads}</Text>
@@ -47,4 +45,4 @@ const BookView = ({ book }: { book: Book; }) => {
   );
 };
 
-export default BookView;
+export default React.memo(BookView);
