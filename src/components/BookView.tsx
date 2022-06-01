@@ -33,7 +33,7 @@ const BookView = ({ book }: { book: Book; }) => {
         <div>
           <Link>
             <NextLink href={`/book/${book.id}`}>
-              <Heading as="h2" size="md">{truncateString(book.title)}</Heading>
+              <Heading data-testid="title" as="h2" size="md">{truncateString(book.title)}</Heading>
             </NextLink>
           </Link>
           <Text>Downloads: {book.downloads}</Text>
