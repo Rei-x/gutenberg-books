@@ -1,10 +1,10 @@
 import { HStack, Box, Heading, Link, Image, Text, Skeleton } from '@chakra-ui/react';
 import NextLink from "next/link";
 import React, { useMemo } from 'react';
-import { Book, ResourceType } from '@/types/booksGet';
+import { Book, ResourceType } from '../types/booksGet';
 import MarkAsFavorite from './MarkAsFavorite';
 import { motion } from 'framer-motion';
-import { truncateString } from '@/utils/truncateString';
+import { truncateString } from '../utils/truncateString';
 import ImageWithSkeleton from './ImageWithSkeleton';
 
 const getImageFromBook = (book: Book) => {
@@ -36,8 +36,8 @@ const BookView = ({ book }: { book: Book; }) => {
               <Heading data-testid="title" as="h2" size="md">{truncateString(book.title)}</Heading>
             </NextLink>
           </Link>
-          <Text>Downloads: {book.downloads}</Text>
-          <Text>Author: {getAuthorFromBook(book)}</Text>
+          <Text data-testid="downloads">Downloads: {book.downloads}</Text>
+          <Text data-testid="author">Author: {getAuthorFromBook(book)}</Text>
         </div>
         <MarkAsFavorite bookId={book.id.toString()} />
       </Box>

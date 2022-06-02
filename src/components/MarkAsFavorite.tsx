@@ -1,5 +1,5 @@
-import { auth } from '@/firebase';
-import useFavoriteBook from '@/hooks/useFavoriteBook';
+import { auth } from '../firebase';
+import useFavoriteBook from '../hooks/useFavoriteBook';
 import { StarIcon } from '@chakra-ui/icons';
 import { HStack, Link } from '@chakra-ui/react';
 import React from 'react';
