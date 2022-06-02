@@ -27,6 +27,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.1.0",
+    "@swc/core": "^1.2.196",
+    "@swc/jest": "^0.2.21",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
