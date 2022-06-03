@@ -5,20 +5,6 @@ import BookView from "@/components/BookView";
 import Providers from "@/components/Providers";
 import { AgentType, Book, ResultType } from "@/types/booksGet";
 
-beforeAll(() => {
-  Object.defineProperty(window, "matchMedia", {
-    writable: true,
-    value: jest.fn().mockImplementation(query => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    }))
-  });
-});
-
 test("Renders book view", () => {
   jest.spyOn(console, "error").mockImplementation(() => { });
   const book: Book = {

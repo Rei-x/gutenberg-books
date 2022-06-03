@@ -1,7 +1,7 @@
 // Add any custom config to be passed to Jest
 const customJestConfig = {
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  setupFilesAfterEnv: ["./jest.setup.js"],
   transform: {
     "^.+\\.(t|j)sx?$": "@swc/jest",
   },
