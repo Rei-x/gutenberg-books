@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { faker } from "@faker-js/faker";
 import BookView from "@/components/BookView";
 import Providers from "@/components/Providers";
@@ -12,9 +12,11 @@ import {
   ResultType,
 } from "@/types/booksGet";
 
-test("Renders book view", () => {
-  jest.spyOn(console, "error").mockImplementation(() => {});
+jest.mock("react-firebase-hooks/auth", () => ({
+  useAuthState: jest.fn().mockReturnValue([]),
+}));
 
+test("Renders book view", () => {
   const author: Agent = {
     type: AgentType.Author,
     id: parseInt(faker.random.numeric(4)),
@@ -30,7 +32,7 @@ test("Renders book view", () => {
   const book: Book = {
     id: parseInt(faker.random.numeric(4)),
     type: ResultType.Text,
-    title: "Title",
+    title: faker.lorem.words(3),
     description: null,
     downloads: parseInt(faker.random.numeric(4)),
     license: "",
