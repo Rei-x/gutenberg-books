@@ -3,6 +3,10 @@ import { act, fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import SearchInput from "@/components/SearchInput";
 
+afterEach(() => {
+  jest.useRealTimers();
+});
+
 test("Search input updates text", async () => {
   const onChange = jest.fn();
   jest.useFakeTimers();
@@ -15,8 +19,8 @@ test("Search input updates text", async () => {
   act(() => {
     fireEvent.change(screen.getByTestId("search"), {
       target: {
-        value: searchValue
-      }
+        value: searchValue,
+      },
     });
     jest.advanceTimersByTime(700);
   });
