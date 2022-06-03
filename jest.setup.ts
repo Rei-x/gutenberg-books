@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
+import { server } from "./src/msw/server";
 /**
  * https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
  */
@@ -14,7 +15,12 @@ const matchMediaMock = () => {
       dispatchEvent: jest.fn(),
     })),
   });
-}
+};
 
 matchMediaMock();
 
+beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
+
+afterEach(() => server.resetHandlers());
+
+afterAll(() => server.close());
