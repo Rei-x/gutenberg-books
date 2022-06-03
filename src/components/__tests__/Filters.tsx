@@ -3,29 +3,32 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Filters from "../Filters";
 
-const setup = (...args: Parameters<typeof render>) => {
+const renderFilters = () => {
+  const setFilters = jest.fn();
+  const utils = render(<Filters setFilters={setFilters} />);
+
   return {
     user: userEvent.setup(),
-    ...render(...args),
+    setFilters,
+    ...utils,
   };
 };
 
 describe("Filters", () => {
   test("Show and hide filters", async () => {
-    const setFilters = jest.fn();
-    const { user } = setup(<Filters setFilters={setFilters} />);
+    const { user, setFilters } = renderFilters();
 
-    expect(screen.queryByText("All languages")).not.toBeInTheDocument();
+    const defaultOption = "All languages";
+    expect(screen.queryByText(defaultOption)).not.toBeInTheDocument();
 
     await user.click(screen.getByText("Show filters"));
 
-    expect(screen.getByText("All languages")).toBeInTheDocument();
+    expect(screen.getByText(defaultOption)).toBeInTheDocument();
     expect(setFilters).toHaveBeenCalledTimes(0);
   });
 
   test("Selecting language sets language in setFilters", async () => {
-    const setFilters = jest.fn();
-    const { user } = setup(<Filters setFilters={setFilters} />);
+    const { user, setFilters } = renderFilters();
 
     await user.click(screen.getByText("Show filters"));
     await user.selectOptions(screen.getByTestId("language-select"), "Polish");
