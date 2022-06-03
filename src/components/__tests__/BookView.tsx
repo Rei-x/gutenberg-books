@@ -3,12 +3,32 @@ import { render, screen } from "@testing-library/react";
 import { faker } from "@faker-js/faker";
 import BookView from "@/components/BookView";
 import Providers from "@/components/Providers";
-import { AgentType, Book, ResultType } from "@/types/booksGet";
+import {
+  Agent,
+  AgentType,
+  Book,
+  Resource,
+  ResourceType,
+  ResultType,
+} from "@/types/booksGet";
 
 test("Renders book view", () => {
-  jest.spyOn(console, "error").mockImplementation(() => { });
+  jest.spyOn(console, "error").mockImplementation(() => {});
+
+  const author: Agent = {
+    type: AgentType.Author,
+    id: parseInt(faker.random.numeric(4)),
+    person: faker.name.findName(),
+  };
+
+  const image: Resource = {
+    type: ResourceType.ImageJPEG,
+    id: parseInt(faker.random.numeric(4)),
+    uri: `${faker.image.lorempicsum.imageUrl(200, 280)}?medium.jpg`,
+  };
+
   const book: Book = {
-    id: 23,
+    id: parseInt(faker.random.numeric(4)),
     type: ResultType.Text,
     title: "Title",
     description: null,
@@ -17,13 +37,19 @@ test("Renders book view", () => {
     subjects: [],
     bookshelves: [],
     languages: [],
-    agents: [
-      { type: AgentType.Author, id: 12, person: faker.name.findName() }
-    ],
-    resources: []
+    agents: [author],
+    resources: [image],
   };
+
   render(<BookView book={book} />, { wrapper: Providers });
-  expect(screen.getByTestId("title")).toHaveTextContent(book.title);
-  expect(screen.getByTestId("author")).toHaveTextContent(book.agents[0].person);
-  expect(screen.getByTestId("downloads")).toHaveTextContent(book.downloads.toString());
+
+  expect(screen.queryByText(book.title)).toBeInTheDocument();
+  expect(screen.queryByText(`Author: ${author.person}`)).toBeInTheDocument();
+  expect(screen.queryByAltText("Cover of the book")).toHaveAttribute(
+    "src",
+    image.uri
+  );
+  expect(
+    screen.queryByText(`Downloads: ${book.downloads.toString()}`)
+  ).toBeInTheDocument();
 });
