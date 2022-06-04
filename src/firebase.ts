@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -18,3 +18,15 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+connectFirestoreEmulator(
+  db,
+  "8080-reix-vnc-7htm8g1oyk4.ws-eu46.gitpod.io",
+  443
+);
+console.log(db._settings);
+db._settings.ssl = true;
+connectAuthEmulator(
+  auth,
+  "https://9099-reix-vnc-7htm8g1oyk4.ws-eu46.gitpod.io"
+);
