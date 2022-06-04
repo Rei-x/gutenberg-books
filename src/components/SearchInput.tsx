@@ -11,7 +11,7 @@ const SearchInput = chakra(({ value, setValue, className }: { value: string, set
   }, [debouncedValue, setValue]);
 
   return (
-    <Input className={className} placeholder="Search for your book!" value={search} onChange={(e) => setSearch(e.target.value)} />
+    <Input data-testid="search" className={className} placeholder="Search for your book!" value={search} onChange={(e) => setSearch(e.target.value)} />
   );
 });
 
