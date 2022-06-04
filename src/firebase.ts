@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDu4-Ow6dST8RFxIIfBhxD7CmiHLVFgZWY",
@@ -19,14 +18,13 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-connectFirestoreEmulator(
-  db,
-  "8080-reix-vnc-7htm8g1oyk4.ws-eu46.gitpod.io",
-  443
-);
-console.log(db._settings);
-db._settings.ssl = true;
-connectAuthEmulator(
-  auth,
-  "https://9099-reix-vnc-7htm8g1oyk4.ws-eu46.gitpod.io"
-);
+// connectFirestoreEmulator(
+//   db,
+//   "8080-reix-vnc-iasdbgoea14.ws-eu46.gitpod.io",
+//   443
+// );
+// db._settings.ssl = true;
+// connectAuthEmulator(
+//   auth,
+//   "https://9099-reix-vnc-iasdbgoea14.ws-eu46.gitpod.io"
+// );

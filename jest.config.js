@@ -12,6 +12,7 @@ const customJestConfig = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   transformIgnorePatterns: ["node_modules/(?!firebase|@firebase)"],
+  silent: true,
 };
 
 module.exports = customJestConfig;

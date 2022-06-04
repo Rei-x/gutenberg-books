@@ -1,4 +1,11 @@
+import { RecordOptions } from "@neuralegion/cypress-har-generator";
+
 describe("Index view", () => {
+  before(() => {
+    cy.recordHar({
+      includeHosts: ["gnikdroy.pythonanywhere.com"],
+    } as RecordOptions);
+  });
   it("scrolls and load books", () => {
     cy.visit("/");
     const loading = /It can take/i;
@@ -13,6 +20,9 @@ describe("Index view", () => {
       .first()
       .click();
     cy.url().should("include", "/book/28240");
+  });
+  after(() => {
+    cy.saveHar();
   });
 });
 

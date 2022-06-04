@@ -4,7 +4,6 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,8 +17,9 @@
     "paths": {
       "@/*": ["*"]
     },
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strict": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "**/*.test.tsx"]
+  "exclude": ["node_modules", "**/*.test.tsx", "cypress"]
 }
