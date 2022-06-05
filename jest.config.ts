@@ -15,4 +15,4 @@ const customJestConfig = {
   silent: true,
 };
 
-module.exports = customJestConfig;
+export default customJestConfig;

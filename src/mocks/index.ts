@@ -1,4 +1,4 @@
-const options = { quiet: true, onUnhandledRequest: "bypass" };
+const options = { onUnhandledRequest: "bypass" };
 
 if (typeof window === "undefined") {
   const { server } = require("./server");

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,14 +16,27 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["cypress", "@testing-library/cypress"],
+    "types": [
+      "@testing-library/jest-dom",
+      "jest"
+    ],
     "baseUrl": "src", // This must be specified if "paths" is.
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*"
+      ]
     },
     "isolatedModules": true,
     "strict": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "**/*.test.tsx", "cypress"]
+  "include": [
+    "**/*.tsx",
+    "**/*.ts",
+    "next-env.d.ts",
+    "global.d.ts",
+    "./jest-setup.ts"
+  ],
+  "exclude": [
+    "node_modules",
+  ]
 }
