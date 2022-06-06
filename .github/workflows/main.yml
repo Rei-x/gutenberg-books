@@ -1,0 +1,33 @@
+name: GitHub Actions Demo
+on: [pull_request, push]
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.14.0-chrome99-ff97
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Update deps
+        run: apt-get update
+      - name: Install deps
+        run: apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: yarn dev
+          browser: chrome
+          headless: true
+  integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install
+        run: yarn install
+      - name: Test
+        run: yarn test
+

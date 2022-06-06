@@ -26,8 +26,8 @@ it("Mark book as favorite and check if it's in favorite books", () => {
     cy.url().should("contain", "/favorite-books");
     cy.findByText(title).should("be.visible");
     cy.findByText(unmarkAsFavoriteRegex).should("be.visible");
-
-    cy.findByText(unmarkAsFavoriteRegex).click();
+    cy.findByText(unmarkAsFavoriteRegex).as("unmark");
+    cy.get("@unmark").click({ force: true });
     cy.findByText(title).should("not.exist");
     cy.findByText(/you don't have any favorite books/i).should("be.visible");
   });

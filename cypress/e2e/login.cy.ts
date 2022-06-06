@@ -8,5 +8,5 @@ it("Login in using anonymous account", () => {
 
   cy.findByText(/anonymous/i).click({ force: true });
   cy.deleteUser(); //Cleanup
-  cy.findByText(/logout/i).click();
+  cy.findByText(/logout/i).click({ force: true });
 });
