@@ -30,14 +30,13 @@
     "strict": true
   },
   "include": [
-    "**/*.tsx",
-    "**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.ts",
     "next-env.d.ts",
     "global.d.ts",
     "./jest-setup.ts"
   ],
   "exclude": [
     "node_modules",
-    "cypress"
   ]
 }
