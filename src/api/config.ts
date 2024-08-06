@@ -1,1 +1,1 @@
-export const url = "https://gnikdroy.pythonanywhere.com/api";
+export const url = "https://api.gutenberg.solvro.pl/api";
